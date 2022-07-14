@@ -7,7 +7,7 @@ public class MovieTheater {
 
     private int totalRows;
     private int totalColumns;
-    private List<Seats> availableSeats =
+    private List<Seat> availableSeats =
             new ArrayList<>();
 
     public MovieTheater(int totalRows, int totalColumns) {
@@ -35,12 +35,12 @@ public class MovieTheater {
 
         for (int i = 1; i <= totalRows; i++) {
             for (int j = 1; j <= totalColumns; j++) {
-                availableSeats.add(new Seats(i, j));
+                availableSeats.add(new Seat(i, j));
             }
         }
     }
 
-    public List<Seats> getAvailableSeats() {
+    public List<Seat> getAvailableSeats() {
 
         return availableSeats;
     }

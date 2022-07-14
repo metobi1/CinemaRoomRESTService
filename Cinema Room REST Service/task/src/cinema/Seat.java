@@ -1,11 +1,11 @@
 package cinema;
 
-public class Seats {
+public class Seat {
 
     private int row;
     private int column;
 
-    public Seats(int row, int column) {
+    public Seat(int row, int column) {
         this.row = row;
         this.column = column;
     }
