@@ -2,7 +2,7 @@ package cinema;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Seat implements SeatInterface {
+public class Seat {
 
     private int row;
     private int column;
