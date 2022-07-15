@@ -1,7 +1,10 @@
 package cinema;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class MovieTheater {
 
@@ -9,6 +12,9 @@ public class MovieTheater {
     private int totalColumns = 9;
     private List<Seat> availableSeats =
             new ArrayList<>();
+
+    private ConcurrentMap<UUID, Seat> tickets =
+            new ConcurrentHashMap<>();
 
     public MovieTheater() {
         setAvailableSeats();
@@ -40,7 +46,14 @@ public class MovieTheater {
     }
 
     public List<Seat> getAvailableSeats() {
-
         return availableSeats;
+    }
+    @JsonIgnore
+    public ConcurrentMap<UUID, Seat> getTickets() {
+        return tickets;
+    }
+
+    public void storeTicket(UUID uuid, Seat seat) {
+        tickets.put(uuid, seat);
     }
 }

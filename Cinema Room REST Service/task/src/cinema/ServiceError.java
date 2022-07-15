@@ -11,7 +11,7 @@ import java.util.Map;
 public class ServiceError {
 
     @ExceptionHandler(SeatException.class)
-    public ResponseEntity<Map<String, String>> handleIsBookedException(SeatException e) {
+    public ResponseEntity<Map<String, String>> handleAllExceptions(SeatException e) {
         return new ResponseEntity<>(Map.of("error", e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }
