@@ -1,11 +1,7 @@
 package cinema;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -27,7 +23,7 @@ public class MovieTheaterController {
                     seat.getColumn() == seatRequest.getColumn()) {
 
                 if (seat.isTaken()) {
-                    throw new SeatException("The ticket has been already purchased!");
+                    throw new CinemaException("The ticket has been already purchased!");
                 } else {
                     seat.setTaken(true);
                     Purchase purchase = new Purchase(seat);
@@ -36,7 +32,7 @@ public class MovieTheaterController {
                 }
             }
         }
-        throw new SeatException("The number of a row or a column is out of bounds!");
+        throw new CinemaException("The number of a row or a column is out of bounds!");
     }
 
     @PostMapping("/return")
@@ -52,6 +48,14 @@ public class MovieTheaterController {
                 return returnedTicket;
             }
         }
-        throw new SeatException("Wrong token!");
+        throw new CinemaException("Wrong token!");
+    }
+
+    @PostMapping("/stats")
+    public TicketSalesReport ticketSalesReport(@RequestParam(required = false) String password) {
+        if ("super_secret".equals(password)) {
+            return new TicketSalesReport(movieTheater);
+        }
+        throw new SecurityException("The password is wrong!");
     }
 }
